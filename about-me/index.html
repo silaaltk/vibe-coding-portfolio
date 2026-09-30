@@ -50,10 +50,20 @@
 
         <section id="iletisim">
             <h2>İletişim</h2>
-            <p>Benimle iletişime geçmek için aşağıdaki bağlantılardan bana ulaşabilirsiniz:</p>
-            <p>E-posta: <a href="mailto:silaaltunk1@gmail.com" style="color: var(--primary-solid); font-weight: 600; text-decoration: none;">silaaltunk1@gmail.com</a></p>
-            <p>GitHub: <a href="https://github.com/silaaltk" target="_blank" style="color: var(--primary-solid); font-weight: 600; text-decoration: none;">github.com/silaaltk</a></p>
-            <p>LinkedIn: <a href="https://linkedin.com/in/silaaltk" target="_blank" style="color: var(--primary-solid); font-weight: 600; text-decoration: none;">linkedin.com/in/silaaltk</a></p>
+            <p>Benimle iletişime geçmek için formu doldurabilir veya aşağıdaki bağlantılardan bana ulaşabilirsiniz:</p>
+            
+            <form id="iletisimFormu">
+                <input type="text" name="isim" id="isim" placeholder="Adınız" required>
+                <input type="email" name="eposta" id="eposta" placeholder="E-posta Adresiniz" required>
+                <textarea name="mesaj" id="mesaj" placeholder="Mesajınız..." required></textarea>
+                <button type="submit" id="gonderBtn">Gönder</button>
+            </form>
+            <p id="formDurum" style="margin-top: 1rem; font-weight: 600; display: none;"></p>
+
+            <div style="margin-top: 2rem;">
+                <p>GitHub: <a href="https://github.com/silaaltk" target="_blank" style="color: var(--primary-solid); font-weight: 600; text-decoration: none;">github.com/silaaltk</a></p>
+                <p>LinkedIn: <a href="https://linkedin.com/in/silaaltk" target="_blank" style="color: var(--primary-solid); font-weight: 600; text-decoration: none;">linkedin.com/in/silaaltk</a></p>
+            </div>
         </section>
     </main>
 
