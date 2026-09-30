@@ -1,4 +1,12 @@
-// Form gönderme olayı (Fetch ile arka planda Formspree'ye gönderme)
+// Buton tıklama olayı - Hakkımda bölümüne yumuşak kaydırma
+const dahaFazlaBtn = document.getElementById('dahaFazlaBtn');
+if (dahaFazlaBtn) {
+    dahaFazlaBtn.addEventListener('click', function() {
+        document.getElementById('hakkimda').scrollIntoView({ behavior: 'smooth' });
+    });
+}
+
+// Form gönderme olayı (Fetch ile kendi yerel sunucumuza gönderme)
 const iletisimFormu = document.getElementById('iletisimFormu');
 if (iletisimFormu) {
     iletisimFormu.addEventListener('submit', async function(e) {
@@ -14,16 +22,24 @@ if (iletisimFormu) {
         formDurum.style.display = 'none';
 
         try {
-            const response = await fetch('https://formspree.io/f/mdekbbql', {
+            // Form verilerini JSON nesnesine dönüştürüyoruz
+            const formData = {
+                isim: form.querySelector('#isim').value,
+                eposta: form.querySelector('#eposta').value,
+                mesaj: form.querySelector('#mesaj').value
+            };
+
+            const response = await fetch('/api/iletisim', {
                 method: 'POST',
-                body: new FormData(form),
+                body: JSON.stringify(formData),
                 headers: {
+                    'Content-Type': 'application/json',
                     'Accept': 'application/json'
                 }
             });
 
             if (response.ok) {
-                formDurum.textContent = 'Teşekkürler! Mesajınız başarıyla gönderildi.';
+                formDurum.textContent = 'Teşekkürler! Mesajınız kendi sunucunuza başarıyla ulaştı.';
                 formDurum.style.color = '#10b981'; // Yeşil renk başarı mesajı
                 formDurum.style.display = 'block';
                 form.reset(); // Formu temizle
@@ -31,7 +47,7 @@ if (iletisimFormu) {
                 throw new Error('Bir hata oluştu.');
             }
         } catch (error) {
-            formDurum.textContent = 'Üzgünüm, mesajınız gönderilemedi. Lütfen tekrar deneyin.';
+            formDurum.textContent = 'Üzgünüm, sunucuya ulaşılamadı. Sunucunun çalıştığından emin olun.';
             formDurum.style.color = '#f43f5e'; // Kırmızı renk hata mesajı
             formDurum.style.display = 'block';
         } finally {
